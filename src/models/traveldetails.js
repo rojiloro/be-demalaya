@@ -15,7 +15,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   TravelDetails.init({
     TravelDetailsID: DataTypes.INTEGER,
-    PersonalID: DataTypes.INTEGER,
+    PersonalID: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'PersonalInformation', 
+        key: 'id',
+      }
+    },
     PreferredDestinations: DataTypes.TEXT,
     PreferredStartDate: DataTypes.DATE,
     FlexibleDates: DataTypes.BOOLEAN,
@@ -28,5 +34,12 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'TravelDetails',
   });
+
+  TravelDetails.associate = (models) => {
+    TravelDetails.belongsTo(models.PersonalInformation, {
+      foreignKey: 'PersonalID', // Kolom foreign key di TravelDetails
+      as: 'personalInfo',      // Alias untuk relasi
+    });
+  };
   return TravelDetails;
 };

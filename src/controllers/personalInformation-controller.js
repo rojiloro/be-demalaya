@@ -80,7 +80,8 @@ const getPersonalInformationbyId = async (req, res) => {
         });
 
     } catch (error) {
-        
+        console.error('Error:', error);
+        return res.status(500).json({ message: 'Internal server error' });
     }
 }
 
@@ -90,7 +91,7 @@ const updatePersonalInformation = async (req, res) => {
         const {id} = req.params;
         const {fullname, email, phonenumber, preferedcontactmethod} = req.body;
 
-        const updatePersonalInfo =await PersonalInformation.findByPk(id);
+        const updatePersonalInfo = await PersonalInformation.findByPk(id);
 
         if (!updatePersonalInfo) {
             return res.status(404).json({

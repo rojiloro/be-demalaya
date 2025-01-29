@@ -13,7 +13,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       PersonalID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'PersonalInformation', 
+          key: 'id' 
+        },
+        onDelete: 'CASCADE', 
+        onUpdate: 'CASCADE'
       },
       PreferredDestinations: {
         type: Sequelize.TEXT
