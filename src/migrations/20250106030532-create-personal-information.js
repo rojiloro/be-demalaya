@@ -12,16 +12,20 @@ module.exports = {
         onUpdate: 'CASCADE'
       },
       fullname: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       phonenumber: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       PreferredContactMethod: {
-        type: Sequelize.ENUM('Email', 'Phone', 'WhatsApp', 'Other')
+        type: Sequelize.ENUM('Email', 'Phone', 'WhatsApp', 'Other'),
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

@@ -14,10 +14,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   PersonalInformation.init({
-    fullname: DataTypes.STRING,
-    email: DataTypes.STRING,
-    phonenumber: DataTypes.INTEGER,
-    PreferredContactMethod: DataTypes.ENUM('Email', 'Phone', 'WhatsApp', 'Other')
+    fullname: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    phonenumber: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    PreferredContactMethod: {
+      type: DataTypes.ENUM('Email', 'Phone', 'WhatsApp', 'Other'),
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'PersonalInformation',

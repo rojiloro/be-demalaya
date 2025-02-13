@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class TravelDetails extends Model {
     /**
@@ -10,36 +9,61 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      TravelDetails.belongsTo(models.PersonalInformation, {
+        foreignKey: 'PersonalID', // Kolom foreign key di TravelDetails
+        as: 'personalInfo', // Alias untuk relasi
+      });
     }
   }
-  TravelDetails.init({
-    TravelDetailsID: DataTypes.INTEGER,
-    PersonalID: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'PersonalInformation', 
-        key: 'id',
-      }
-    },
-    PreferredDestinations: DataTypes.TEXT,
-    PreferredStartDate: DataTypes.DATE,
-    FlexibleDates: DataTypes.BOOLEAN,
-    TripDurationDays: DataTypes.INTEGER,
-    NumberOfParticipants: DataTypes.INTEGER,
-    Adults: DataTypes.INTEGER,
-    Children: DataTypes.INTEGER,
-    ChildrenAges: DataTypes.TEXT
-  }, {
-    sequelize,
-    modelName: 'TravelDetails',
-  });
 
-  TravelDetails.associate = (models) => {
-    TravelDetails.belongsTo(models.PersonalInformation, {
-      foreignKey: 'PersonalID', // Kolom foreign key di TravelDetails
-      as: 'personalInfo',      // Alias untuk relasi
-    });
-  };
+  TravelDetails.init(
+    {
+      PersonalID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'PersonalInformation',
+          key: 'id',
+        },
+      },
+      PreferredDestinations: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      PreferredStartDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      FlexibleDates: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      TripDurationDays: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      NumberOfParticipants: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      Adults: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      Children: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      ChildrenAges: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'TravelDetails',
+    }
+  );
+
   return TravelDetails;
 };

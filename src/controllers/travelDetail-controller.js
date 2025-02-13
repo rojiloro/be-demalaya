@@ -6,7 +6,6 @@ const PersonalInfo = Model.PersonalInformation;
 const createTravelDetail = async (req, res) => {
     try {
         const {
-            travelDetailID,
             personalID,
             preferredDestinations,
             preferredStartDate,
@@ -18,44 +17,8 @@ const createTravelDetail = async (req, res) => {
             childrenAges
           } = req.body;
       
-          
-          if (!travelDetailID) {
-            return res.status(400).send("Travel Detail ID is required!");
-          }
-          if (!personalID) {
-            return res.status(400).send("PersonalID is required!");
-          }
-          if (!preferredDestinations) {
-            return res.status(400).send("Preffered Destination is required!");
-          }
-          if (!preferredStartDate) {
-            return res.status(400).send("Prefered Start Date is required!");
-          }
-          if (!flexibleDates) {
-            return res.status(400).send("Flexible Date is required!");
-          }
-          if (!tripDurationDays) {
-            return res.status(400).send("Trip Duration Days is required!");
-          }
-          if (!numberOfParticipants) {
-            return res.status(400).send("Number of Participants is required!");
-          }
-          if (!adults) {
-            return res.status(400).send("Adults is required!");
-          }
-          if (!children) {
-            return res.status(400).send("Children is required!");
-          }
-          if (!childrenAges) {
-            return res.status(400).send("Children Ages is required!");
-          }
-      
-          
-          
-          
           // Buat entri baru di TravelDetails
           const travelDetails = await TravelDetail.create({
-            TravelDetailsID : travelDetailID,
             PersonalID : personalID,
             PreferredDestinations : preferredDestinations,
             PreferredStartDate : preferredStartDate,
