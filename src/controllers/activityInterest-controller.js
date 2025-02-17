@@ -11,6 +11,13 @@ const createActivity = async (req, res) => {
             specialInterest
         } = req.body;
 
+        const travelDetails = await TravelDetails.findByPk(travelDetailsId);
+        if (!travelDetails) {
+            return res.status(400).json({
+                error: "Invalid TravelDetailsID. The referenced travel details do not exist."
+            });
+        }
+
         const validActivityLevel = ['Relaxed', 'Moderate', 'Adventurous'];
         if (!validActivityLevel.includes(activityLevel)) {
         return res.status(400).json({

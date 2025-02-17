@@ -9,25 +9,8 @@ const createPersonalInformation = async (req, res) => {
 
         const validMethods = ['Email', 'Phone', 'WhatsApp', 'Other'];
         if (!validMethods.includes(preferedcontactmethod)) {
-          return res.status(400).json({ message: 'Invalid contact method' });
+          return res.status(400).json({ message: `Invalid Preffered contact method. Valid values are: ${validMethods.join(', ')}` });
         }
-
-        if (!fullname) {
-            return res.status(400).send("Fullname is required!");
-        }
-        
-        if (!email) {
-            return res.status(400).send("Email is required!");
-        }
-
-        if (!phonenumber) {
-            return res.status(400).send("Phone number is required!");
-        }
-
-        if (!preferedcontactmethod) {
-            return res.status(400).send("Prefered contact method is required!");
-        }
-        
         
         const personalInfo = await PersonalInformation.create({
             fullname:fullname,
@@ -37,8 +20,6 @@ const createPersonalInformation = async (req, res) => {
         });
         
         return res.status(201).json(personalInfo);
-        
-
     } catch (error) {
         console.error('Error:', error);
     }

@@ -11,6 +11,13 @@ const createAccomodation = async (req, res) => {
             specialAccommodationRequests
         } = req.body;
 
+        const travelDetails = await TravelDetail.findByPk(travelDetailsID);
+        if (!travelDetails) {
+            return res.status(400).json({
+                error: "Invalid TravelDetailsID. The referenced travel details do not exist."
+            });
+        }
+
          // Validasi ENUM untuk PreferredAccommodationType
         const validAccommodationTypes = ['Luxury', 'Budget'];
         if (!validAccommodationTypes.includes(preferredAccommodationType)) {

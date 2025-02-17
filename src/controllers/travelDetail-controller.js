@@ -16,6 +16,13 @@ const createTravelDetail = async (req, res) => {
             children,
             childrenAges
           } = req.body;
+
+          const personalId = await PersonalInfo.findByPk(personalID);
+          if (!personalId) {
+              return res.status(400).json({
+                  error: "Invalid personalId. The referenced travel details do not exist."
+              });
+          }
       
           // Buat entri baru di TravelDetails
           const travelDetails = await TravelDetail.create({
@@ -37,6 +44,7 @@ const createTravelDetail = async (req, res) => {
           });
         } catch (error) {
           // Tangani error
+          console.error("Error: ", error);
           res.status(500).send({
             message: error.message || "An error occurred while creating travel details.",
           });
@@ -97,10 +105,10 @@ const getTravelDetailById = async (req, res) => {
         data: travelDetailsWithPersonal,
     });
 
-} catch (error) {
+  } catch (error) {
     console.error('Error:', error);
     return res.status(500).json({ message: 'Internal server error' });
-}
+  }
 }
 
 
@@ -118,9 +126,6 @@ const updateTravelDetail = async (req, res) => {
       children,
       childrenAges,
     } = req.body;
-
-    console.log('ID yang diterima:', id);
-    console.log('Data yang diterima:', req.body);
 
     const travelDetail = await TravelDetail.findByPk(id);
 
@@ -142,8 +147,6 @@ const updateTravelDetail = async (req, res) => {
       ChildrenAges : childrenAges,
     });
 
-    await travelDetail.save();
-
     const personalInfo = await PersonalInfo.findByPk(travelDetail.PersonalID);
 
     const travelDetailsWithPersonal = {
@@ -151,7 +154,7 @@ const updateTravelDetail = async (req, res) => {
       PersonalID: personalInfo ? [personalInfo.dataValues] : [], // Data dari PersonalInfo
     };
 
-    res.status(200).json({
+    return res.status(200).json({
       message: `Travel Detail dengan ID ${id} berhasil diperbarui`,
       data: travelDetailsWithPersonal,
     });
@@ -177,7 +180,7 @@ const deleteTravelDetail = async (req, res) => {
 
         await travelDetail.destroy();
 
-        res.status(200).json({
+        return res.status(200).json({
             message : `Travel Detail dengan ID ${id} berhasil dihapus`
         })
 

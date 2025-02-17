@@ -12,10 +12,17 @@ const createTransportation = async (req, res) => {
             prefferedTransportType
         } = req.body;
 
+        const travelDetails = await TravelDetails.findByPk(travelDetailsID);
+        if (!travelDetails) {
+            return res.status(400).json({
+                error: "Invalid TravelDetailsID. The referenced travel details do not exist."
+            });
+        }
+
         const validPrefferedTransportType = ['Car', 'Train', 'Bus', 'Flight', 'Ship','Private Car', 'Boat'];
         if (!validPrefferedTransportType.includes(prefferedTransportType)) {
         return res.status(400).json({
-             error: `Invalid Preffered Transport Type. Valid values are: ${validActivityLevel.join(', ')}`,
+             error: `Invalid Preffered Transport Type. Valid values are: ${validPrefferedTransportType.join(', ')}`,
             });
         }
 
@@ -149,7 +156,8 @@ const updateTransportation = async (req, res) => {
 
         return res.status(200).json(transportationWithTravelDetail);
     } catch (error) {
-        
+        console.error("Error: ",error);
+        res.status(500).json({message : "internal server error!"});
     }
 }
 
