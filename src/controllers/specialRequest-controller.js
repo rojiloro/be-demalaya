@@ -11,6 +11,11 @@ const createSpecialRequest = async (req, res) => {
             specialRequestsNotes
         } = req.body;
 
+        if( !travelDetailsID ||
+            !occasionsToCelebrate ||
+            !additionalServicesNeeded ||
+            !specialRequestsNotes) return res.status(400).json({'message':'field are Required!'});
+
         const travelDetails = await TravelDetails.findByPk(travelDetailsID);
         if (!travelDetails) {
             return res.status(400).json({

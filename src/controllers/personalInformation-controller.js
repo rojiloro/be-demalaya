@@ -7,6 +7,8 @@ const createPersonalInformation = async (req, res) => {
         
         const {fullname, email, phonenumber, preferedcontactmethod } = req.body;
 
+        if(!fullname || !email || !phonenumber || !preferedcontactmethod) return res.status(400).json({'message':'field are Required!'});
+
         const validMethods = ['Email', 'Phone', 'WhatsApp', 'Other'];
         if (!validMethods.includes(preferedcontactmethod)) {
           return res.status(400).json({ message: `Invalid Preffered contact method. Valid values are: ${validMethods.join(', ')}` });

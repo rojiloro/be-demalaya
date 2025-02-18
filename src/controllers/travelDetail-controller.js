@@ -17,6 +17,16 @@ const createTravelDetail = async (req, res) => {
             childrenAges
           } = req.body;
 
+          if(!personalID ||
+            !preferredDestinations ||
+            !preferredStartDate ||
+            !flexibleDates ||
+            !tripDurationDays ||
+            !numberOfParticipants ||
+            !adults ||
+            !children ||
+            !childrenAges) return res.status(400).json({'message':'field are Required!'});
+
           const personalId = await PersonalInfo.findByPk(personalID);
           if (!personalId) {
               return res.status(400).json({

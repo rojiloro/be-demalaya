@@ -11,6 +11,8 @@ const createAccomodation = async (req, res) => {
             specialAccommodationRequests
         } = req.body;
 
+        if(!travelDetailId ||!preferredAccommodationType || !roomType || !specialAccommodationRequests) return res.status(400).json({'message':'field are Required!'});
+
         const travelDetails = await TravelDetail.findByPk(travelDetailsID);
         if (!travelDetails) {
             return res.status(400).json({

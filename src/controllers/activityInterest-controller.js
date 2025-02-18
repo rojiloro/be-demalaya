@@ -11,6 +11,11 @@ const createActivity = async (req, res) => {
             specialInterest
         } = req.body;
 
+        if(!travelDetailsId ||
+            !prefferedActivities ||
+            !activityLevel ||
+            !specialInterest) return res.status(400).json({'message':'field are Required!'});
+
         const travelDetails = await TravelDetails.findByPk(travelDetailsId);
         if (!travelDetails) {
             return res.status(400).json({

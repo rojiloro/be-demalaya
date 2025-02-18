@@ -109,6 +109,7 @@ const updateSubmission = async (req, res) => {
             consent
         } = req.body;
 
+        if( !personalID ||!howDidYouHear ||!consent) return res.status(400).json({'message':'field are Required!'});
         
         if(howDidYouHear !== undefined){
             const validHowDidYouHear = ['Social Media', 'Search Engine', 'Friend', 'Other'];

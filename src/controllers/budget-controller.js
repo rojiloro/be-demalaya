@@ -117,6 +117,8 @@ const updateBudget =async (req, res) => {
             currency
         } = req.body;
 
+        if(!travelDetailsID || !estimatedBudgetPerPerson || !currency) return res.status(400).json({'message':'field are Required!'});
+
         if(currency !== undefined){
             const validCurrency = ['USD', 'EUR', 'GBP', 'IDR', 'JPY'];
             if (!validCurrency.includes(currency)) {

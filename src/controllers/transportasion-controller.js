@@ -12,6 +12,12 @@ const createTransportation = async (req, res) => {
             prefferedTransportType
         } = req.body;
 
+        if( !travelDetailsID ||
+            !internationalFlightRequired ||
+            !departureCity ||
+            !domesticFlightRequired ||
+            !prefferedTransportType) return res.status(400).json({'message':'field are Required!'});
+
         const travelDetails = await TravelDetails.findByPk(travelDetailsID);
         if (!travelDetails) {
             return res.status(400).json({
