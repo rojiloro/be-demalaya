@@ -24,8 +24,6 @@ const basicAuth = async (req, res, next) => {
         // Cek password
         const validPassword = await bcrypt.compare(password, user.password);
 
-        console.log(password);
-        console.log(user.password);
         
         if (!validPassword) {
             return res.status(401).json({ message: 'Unauthorized: Invalid password credentials' });
