@@ -128,8 +128,6 @@ const updateBudget =async (req, res) => {
             currency
         } = req.body;
 
-        if(!travelDetailsID || !estimatedBudgetPerPerson || !currency) return res.status(400).json({'message':'field are Required!'});
-
         if(currency !== undefined){
             const validCurrency = ['USD - US Dollar','EUR - Euro','GBP - British Pound','IDR - Indonesian Rupiah', 'JPY - Japanese Yen','AUD - Australian Dollar','SGD - Singapore Dollar','MYR - Malaysian Ringgit','CNY - Chinese Yuan'];
             if (!validCurrency.includes(currency)) {
