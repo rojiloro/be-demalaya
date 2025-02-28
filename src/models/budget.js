@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     Currency: {
-      type: DataTypes.ENUM('USD', 'EUR', 'GBP', 'IDR', 'JPY'),
+      type: DataTypes.ENUM('USD - US Dollar','EUR - Euro','GBP - British Pound','IDR - Indonesian Rupiah', 'JPY - Japanese Yen','AUD - Australian Dollar','SGD - Singapore Dollar','MYR - Malaysian Ringgit','CNY - Chinese Yuan'),
       allowNull: false,
     },
   }, {

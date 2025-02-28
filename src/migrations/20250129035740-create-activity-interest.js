@@ -20,7 +20,7 @@ module.exports = {
         allowNull: true,
       },
       ActivityLevel: {
-        type: Sequelize.ENUM('Relaxed', 'Moderate', 'Adventurous'),
+        type: Sequelize.ENUM('Relaxed (Minimal physical activity)','Moderate (Some Walking, Light Activities)','Active (Regular activities, longer walks)','Challenging (Strenuous activities, hiking)','Mixed (Combination of activity levels)'),
         allowNull: false,
       },
       SpecialInterests: {

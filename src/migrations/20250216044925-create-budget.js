@@ -24,7 +24,7 @@ module.exports = {
         allowNull: false
       },
       Currency: {
-        type: Sequelize.ENUM('USD', 'EUR', 'GBP', 'IDR', 'JPY'),
+        type: Sequelize.ENUM('USD - US Dollar','EUR - Euro','GBP - British Pound','IDR - Indonesian Rupiah', 'JPY - Japanese Yen','AUD - Australian Dollar','SGD - Singapore Dollar','MYR - Malaysian Ringgit','CNY - Chinese Yuan'),
         allowNull: false
       }
     });

@@ -13,7 +13,7 @@ const createAccomodation = async (req, res) => {
 
         if(!travelDetailId ||!preferredAccommodationType || !roomType || !specialAccommodationRequests) return res.status(400).json({'message':'field are Required!'});
 
-        const travelDetails = await TravelDetail.findByPk(travelDetailsID);
+        const travelDetails = await TravelDetail.findByPk(travelDetailId);
         if (!travelDetails) {
             return res.status(400).json({
                 error: "Invalid TravelDetailsID. The referenced travel details do not exist."
@@ -21,19 +21,19 @@ const createAccomodation = async (req, res) => {
         }
 
          // Validasi ENUM untuk PreferredAccommodationType
-        const validAccommodationTypes = ['Luxury', 'Budget'];
-        if (!validAccommodationTypes.includes(preferredAccommodationType)) {
-        return res.status(400).json({
-            error: `Invalid PreferredAccommodationType. Valid values are: ${validAccommodationTypes.join(', ')}`,
-        });
+        const validAccommodationTypes = ['Luxury Resort', 'Boutique Hotel','Private Villa', 'Guest House','Eco Lodge','Glamping','Traditional Stay'];
+            if (!validAccommodationTypes.includes(preferredAccommodationType)) {
+            return res.status(400).json({
+                error: `Invalid PreferredAccommodationType. Valid values are: ${validAccommodationTypes.join(', ')}`,
+            });
         }
 
         // Validasi ENUM untuk RoomType
-        const validRoomTypes = ['Single', 'Double', 'Suite'];
-        if (!validRoomTypes.includes(roomType)) {
-        return res.status(400).json({
-            error: `Invalid RoomType. Valid values are: ${validRoomTypes.join(', ')}`,
-        });
+        const validRoomTypes = ['Standard Room', 'Deluxe Room', 'Suite','Family Room','Pool Villa','Ocean View Room','Garden View Room','Connecting Room'];
+            if (!validRoomTypes.includes(roomType)) {
+            return res.status(400).json({
+                error: `Invalid RoomType. Valid values are: ${validRoomTypes.join(', ')}`,
+            });
         }
 
         const newAccommodation = await Accomodation.create({
@@ -126,7 +126,24 @@ const updateAccomodation = async (req, res) => {
             roomType,
             specialAccommodationRequests
         } = req.body;
-        
+        if (prefferedAccommodationType !== undefined){
+            const validAccommodationTypes = ['Luxury Resort', 'Boutique Hotel','Private Villa', 'Guest House','Eco Lodge','Glamping','Traditional Stay'];
+            if (!validAccommodationTypes.includes(preferredAccommodationType)) {
+                return res.status(400).json({
+                    error: `Invalid PreferredAccommodationType. Valid values are: ${validAccommodationTypes.join(', ')}`,
+                });
+            }
+        }
+            
+        // Validasi ENUM untuk RoomType
+        if(roomType !== undefined){
+            const validRoomTypes = ['Standard Room', 'Deluxe Room', 'Suite','Family Room','Pool Villa','Ocean View Room','Garden View Room','Connecting Room'];
+            if (!validRoomTypes.includes(roomType)) {
+                return res.status(400).json({
+                    error: `Invalid RoomType. Valid values are: ${validRoomTypes.join(', ')}`,
+                });
+            }
+        }
 
         const accommodationPref = await Accomodation.findByPk(id);
 

@@ -21,11 +21,11 @@ module.exports = {
         onDelete: 'CASCADE',
       },
       PreferredAccommodationType: {
-        type: Sequelize.ENUM('Luxury', 'Budget'),
+        type: Sequelize.ENUM('Luxury Resort','Boutique Hotel','Private Villa','Guest House','Eco Lodge','Glamping','Traditional Stay'),
         allowNull: false,
       },
       RoomType: {
-        type: Sequelize.ENUM('Single', 'Double', 'Suite'),
+        type: Sequelize.ENUM('Standard Room','Deluxe Room','Suite','Family Room','Pool Villa','Ocean View Room','Garden View Room','Connecting Room'),
         allowNull: false,
       },
       SpecialAccommodationRequests: {

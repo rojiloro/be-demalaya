@@ -24,7 +24,7 @@ module.exports = {
         allowNull: false
       },
       MealPlanPreferences: {
-        type: Sequelize.ENUM('All-inclusive', 'Vegetarian', 'Vegan', 'Halal', 'Kosher', 'None'),
+        type: Sequelize.ENUM('All-inclusive (All Meals)','Breakfast Only','Half Board (Breakfast & Dinner)','Full Board (All Meals)','Pay As You Go', 'Custom Plan'),
         allowNull: false
       },
       SpecialFoodRequests: {

@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     MealPlanPreferences: {
-      type: DataTypes.ENUM('All-inclusive', 'Vegetarian', 'Vegan', 'Halal', 'Kosher', 'None'),
+      type: DataTypes.ENUM('All-inclusive (All Meals)','Breakfast Only','Half Board (Breakfast & Dinner)','Full Board (All Meals)','Pay As You Go', 'Custom Plan'),
       allowNull: false
     },
     SpecialFoodRequests: {

@@ -25,7 +25,7 @@ const createTransportation = async (req, res) => {
             });
         }
 
-        const validPrefferedTransportType = ['Car', 'Train', 'Bus', 'Flight', 'Ship','Private Car', 'Boat'];
+        const validPrefferedTransportType = ['Private Car with Driver', 'Shared Van/Bus Service', 'Self-Drive Rental Car', 'Motorcycle Rental', 'Boat/Ferry Service','Luxury Vehicle Service', 'Mixed Transportation'];
         if (!validPrefferedTransportType.includes(prefferedTransportType)) {
         return res.status(400).json({
              error: `Invalid Preffered Transport Type. Valid values are: ${validPrefferedTransportType.join(', ')}`,
@@ -129,7 +129,7 @@ const updateTransportation = async (req, res) => {
         } = req.body;
 
         if (prefferedTransportType !== undefined) {
-            const validPrefferedTransportType = ['Car', 'Train', 'Bus', 'Flight', 'Ship','Private Car', 'Boat'];
+            const validPrefferedTransportType = ['Private Car with Driver', 'Shared Van/Bus Service', 'Self-Drive Rental Car', 'Motorcycle Rental', 'Boat/Ferry Service','Luxury Vehicle Service', 'Mixed Transportation'];
             if (!validPrefferedTransportType.includes(prefferedTransportType)) {
             return res.status(400).json({
                  error: `Invalid Preffered Transport Type. Valid values are: ${validActivityLevel.join(', ')}`,

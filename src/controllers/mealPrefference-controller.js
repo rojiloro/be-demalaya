@@ -23,7 +23,7 @@ const createMeal = async (req, res) => {
             });
         }
 
-        const validMealPrefferences = ['All-inclusive', 'Vegetarian', 'Vegan', 'Halal', 'Kosher', 'None'];
+        const validMealPrefferences = ['All-inclusive (All Meals)','Breakfast Only','Half Board (Breakfast & Dinner)','Full Board (All Meals)','Pay As You Go', 'Custom Plan'];
         if (!validMealPrefferences.includes(mealPlanPreferences)) {
         return res.status(400).json({
              error: `Invalid Meal Prefferences. Valid values are: ${validMealPrefferences.join(', ')}`,
@@ -126,7 +126,7 @@ const updateMeal = async (req, res) => {
         } = req.body;
 
         if(mealPlanPreferences !== undefined){
-            const validMealPrefferences = ['All-inclusive', 'Vegetarian', 'Vegan', 'Halal', 'Kosher', 'None'];
+            const validMealPrefferences = ['All-inclusive (All Meals)','Breakfast Only','Half Board (Breakfast & Dinner)','Full Board (All Meals)','Pay As You Go', 'Custom Plan'];
             if (!validMealPrefferences.includes(mealPlanPreferences)) {
                 return res.status(400).json({
                     error: `Invalid Meal Prefferences. Valid values are: ${validMealPrefferences.join(', ')}`,

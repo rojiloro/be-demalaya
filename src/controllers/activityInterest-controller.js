@@ -23,7 +23,7 @@ const createActivity = async (req, res) => {
             });
         }
 
-        const validActivityLevel = ['Relaxed', 'Moderate', 'Adventurous'];
+        const validActivityLevel = ['Relaxed (Minimal physical activity)','Moderate (Some Walking, Light Activities)','Active (Regular activities, longer walks)','Challenging (Strenuous activities, hiking)','Mixed (Combination of activity levels)'];
         if (!validActivityLevel.includes(activityLevel)) {
         return res.status(400).json({
              error: `Invalid Activity Level. Valid values are: ${validActivityLevel.join(', ')}`,
@@ -121,7 +121,7 @@ const updateActivity = async (req, res) => {
         } = req.body;
         
         if (activityLevel !== undefined) {
-            const validActivityLevel = ['Relaxed', 'Moderate', 'Adventurous'];
+            const validActivityLevel = ['Relaxed (Minimal physical activity)','Moderate (Some Walking, Light Activities)','Active (Regular activities, longer walks)','Challenging (Strenuous activities, hiking)','Mixed (Combination of activity levels)'];
             if (!validActivityLevel.includes(activityLevel)) {
             return res.status(400).json({
                 error: `Invalid Activity Level. Valid values are: ${validActivityLevel.join(', ')}`,

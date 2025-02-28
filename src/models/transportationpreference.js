@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     PreferredTransportType: {
-      type: DataTypes.ENUM('Car', 'Train', 'Bus', 'Flight', 'Ship','Private Car', 'Boat'),
+      type: DataTypes.ENUM('Private Car with Driver', 'Shared Van/Bus Service', 'Self-Drive Rental Car', 'Motorcycle Rental', 'Boat/Ferry Service','Luxury Vehicle Service', 'Mixed Transportation'),
       allowNull: false
     }
   }, {

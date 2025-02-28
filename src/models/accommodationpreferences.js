@@ -8,8 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       // Define association here
       AccommodationPreferences.belongsTo(models.TravelDetails, {
         foreignKey: 'TravelDetailsID',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        as:'Travel Detail'
       });
     }
   }
@@ -31,11 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       PreferredAccommodationType: {
-        type: DataTypes.ENUM('Luxury', 'Budget'),
+        type: DataTypes.ENUM('Luxury Resort','Boutique Hotel','Private Villa','Guest House','Eco Lodge','Glamping','Traditional Stay'),
         allowNull: false,
       },
       RoomType: {
-        type: DataTypes.ENUM('Single', 'Double', 'Suite'),
+        type: DataTypes.ENUM('Standard Room','Deluxe Room','Suite','Family Room','Pool Villa','Ocean View Room','Garden View Room','Connecting Room'),
         allowNull: false,
       },
       SpecialAccommodationRequests: {

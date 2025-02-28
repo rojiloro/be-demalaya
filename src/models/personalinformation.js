@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // One-to-One dengan User
-      PersonalInformation.belongsTo(models.User, { foreignKey: 'userId' });
+      PersonalInformation.belongsTo(models.User,{
+           foreignKey: 'userId',
+           as : 'user'
+        });
     }
   }
   PersonalInformation.init({
@@ -22,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Users', // Sesuai nama tabel
         key: 'id'
       }
-    },fullname: {
+    },
+    fullname: {
       type: DataTypes.STRING,
       allowNull: false
     },

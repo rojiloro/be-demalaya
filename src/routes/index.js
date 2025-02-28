@@ -18,57 +18,58 @@ const submissionC = require("../controllers/submission-controller.js");
 router.post('/register', register);
 router.post('/login', login);
 
+router.post("/personal-info", personalInfoC.createPersonalInformation);
+router.post("/travel-detail", travelDetailsC.createTravelDetail);
+router.post("/accommodation-prefference", accommodationC.createAccomodation);
+router.post("/activity-interest", activityC.createActivity);
+router.post("/transportation-prefference", transportationC.createTransportation);
+router.post("/meal-prefference", mealPrefferenceC.createMeal);
+router.post("/special-request", specialRequestC.createSpecialRequest);
+router.post("/budget", budgetC.createBudget);
+router.post("/submission", submissionC.createSubmission);
+
 router.use(authenticateToken);
 
-router.post("/personal-info", personalInfoC.createPersonalInformation);
 router.get("/personal-infos",personalInfoC.getAllPersonalInformation);
 router.get("/personal-info/:id",personalInfoC.getPersonalInformationbyId);
 router.put("/personal-info/:id",personalInfoC.updatePersonalInformation);
 router.delete("/personal-info/:id", personalInfoC.deletePersonalInformation);
 
-router.post("/travel-detail", travelDetailsC.createTravelDetail);
 router.get("/travel-details", travelDetailsC.getAllTravelDetail);
 router.get("/travel-detail/:id", travelDetailsC.getTravelDetailById);
 router.put("/travel-detail/:id", travelDetailsC.updateTravelDetail);
 router.delete("/travel-detail/:id", travelDetailsC.deleteTravelDetail);
 
-router.post("/accommodation-prefference", accommodationC.createAccomodation);
 router.get("/accommodation-prefferences", accommodationC.getAllAccomodation);
 router.get("/accommodation-prefference/:id", accommodationC.getAccomodationById);
 router.put("/accommodation-prefference/:id", accommodationC.updateAccomodation);
 router.delete("/accommodation-prefference/:id", accommodationC.deleteAccomodation);
 
-router.post("/activity-interest", activityC.createActivity);
 router.get("/activity-interests", activityC.getAllActivities);
 router.get("/activity-interest/:id", activityC.getActivityById);
 router.put("/activity-interest/:id", activityC.updateActivity);
 router.delete("/activity-interest/:id", activityC.deleteActivity);
 
-router.post("/transportation-prefference", transportationC.createTransportation);
 router.get("/transportation-prefferences", transportationC.getAllTransportation);
 router.get("/transportation-prefference/:id", transportationC.getTransportationById);
 router.put("/transportation-prefference/:id", transportationC.updateTransportation);
 router.delete("/transportation-prefference/:id", transportationC.deleteTransportation);
 
-router.post("/meal-prefference", mealPrefferenceC.createMeal);
 router.get("/meal-prefferences", mealPrefferenceC.getAllMeal);
 router.get("/meal-prefference/:id", mealPrefferenceC.getMealById);
 router.put("/meal-prefference/:id", mealPrefferenceC.updateMeal);
 router.delete("/meal-prefference/:id", mealPrefferenceC.deleteMeal);
 
-router.post("/special-request", specialRequestC.createSpecialRequest);
 router.get("/special-requests", specialRequestC.getAllSpecialRequest);
 router.get("/special-request/:id", specialRequestC.getSpecialRequestById);
 router.put("/special-request/:id", specialRequestC.updateSpecialRequest);
 router.delete("/special-request/:id", specialRequestC.deleteSpecialRequest);
 
-router.post("/budget", budgetC.createBudget);
 router.get("/budgets", budgetC.getAllBudget);
 router.get("/budget/:id", budgetC.getBudgetById);
 router.put("/budget/:id", budgetC.updateBudget);
 router.delete("/budget/:id", budgetC.deleteBudget);
 
-router.post("/submission", submissionC.createSubmission);
 router.get("/submissions", submissionC.getAllSubmission);
 router.get("/submission/:id", submissionC.getSubmissionById);
 router.put("/submission/:id", submissionC.updateSubmission);

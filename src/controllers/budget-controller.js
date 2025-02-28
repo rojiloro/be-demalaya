@@ -18,7 +18,7 @@ const createBudget = async (req, res) => {
             });
         }
 
-        const validCurrency = ['USD', 'EUR', 'GBP', 'IDR', 'JPY'];
+        const validCurrency = ['USD - US Dollar','EUR - Euro','GBP - British Pound','IDR - Indonesian Rupiah', 'JPY - Japanese Yen','AUD - Australian Dollar','SGD - Singapore Dollar','MYR - Malaysian Ringgit','CNY - Chinese Yuan'];
         if (!validCurrency.includes(currency)) {
         return res.status(400).json({
                 message: `Invalid Currencies. Valid values are: ${validCurrency.join(', ')}`,
@@ -120,7 +120,7 @@ const updateBudget =async (req, res) => {
         if(!travelDetailsID || !estimatedBudgetPerPerson || !currency) return res.status(400).json({'message':'field are Required!'});
 
         if(currency !== undefined){
-            const validCurrency = ['USD', 'EUR', 'GBP', 'IDR', 'JPY'];
+            const validCurrency = ['USD - US Dollar','EUR - Euro','GBP - British Pound','IDR - Indonesian Rupiah', 'JPY - Japanese Yen','AUD - Australian Dollar','SGD - Singapore Dollar','MYR - Malaysian Ringgit','CNY - Chinese Yuan'];
             if (!validCurrency.includes(currency)) {
              return res.status(400).json({
                  message: `Invalid Currencies. Valid values are: ${validCurrency.join(', ')}`,

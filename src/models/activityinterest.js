@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       ActivityLevel: {
-        type: DataTypes.ENUM('Relaxed', 'Moderate', 'Adventurous'),
+        type: DataTypes.ENUM('Relaxed (Minimal physical activity)','Moderate (Some Walking, Light Activities)','Active (Regular activities, longer walks)','Challenging (Strenuous activities, hiking)','Mixed (Combination of activity levels)'),
         allowNull: false,
       },
       SpecialInterests: {
