@@ -11,11 +11,19 @@ const createMeal = async (req, res) => {
         specialFoodRequests
        } = req.body;
 
-       if(!travelDetailsID ||
-        !dietaryRestrictions ||
-        !mealPlanPreferences ||
-        !specialFoodRequests) return res.status(400).json({'message':'field are Required!'});
-       
+       const requiredFields = {
+        travelDetailsID: "Travel Details ID is required!",
+        dietaryRestrictions: "Dietary Restrictions are required!",
+        mealPlanPreferences: "Meal Plan Preferences are required!",
+        specialFoodRequests: "Special Food Requests are required!"
+      };
+      
+      for (const [field, message] of Object.entries(requiredFields)) {
+        if (!req.body[field]) {
+          return res.status(400).json({ message });
+        }
+      }
+      
        const travelDetails = await TravelDetails.findByPk(travelDetailsID);
         if (!travelDetails) {
             return res.status(400).json({

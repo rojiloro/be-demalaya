@@ -10,7 +10,18 @@ const createBudget = async (req, res) => {
             currency
         } = req.body;
 
-        
+        const requiredFields = {
+            travelDetailsID: "Travel Details ID is required!",
+            estimatedBudgetPerPerson: "Estimated Budget Per Person is required!",
+            currency: "Currency is required!"
+        };
+          
+        for (const [field, message] of Object.entries(requiredFields)) {
+        if (!req.body[field]) {
+            return res.status(400).json({ message });
+        }
+        }
+          
         const travelDetails = await TravelDetails.findByPk(travelDetailsID);
         if (!travelDetails) {
             return res.status(400).json({

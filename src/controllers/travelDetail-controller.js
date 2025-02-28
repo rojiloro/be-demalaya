@@ -17,16 +17,24 @@ const createTravelDetail = async (req, res) => {
             childrenAges
           } = req.body;
 
-          if(!personalID ||
-            !preferredDestinations ||
-            !preferredStartDate ||
-            !flexibleDates ||
-            !tripDurationDays ||
-            !numberOfParticipants ||
-            !adults ||
-            !children ||
-            !childrenAges) return res.status(400).json({'message':'field are Required!'});
-
+          const requiredFields = {
+            personalID: "Personal ID is required!",
+            preferredDestinations: "Preferred Destinations are required!",
+            preferredStartDate: "Preferred Start Date is required!",
+            flexibleDates: "Flexible Dates selection is required!",
+            tripDurationDays: "Trip Duration (Days) is required!",
+            numberOfParticipants: "Number of Participants is required!",
+            adults: "Number of Adults is required!",
+            children: "Number of Children is required!",
+            childrenAges: "Children Ages are required!"
+          };
+          
+          for (const [field, message] of Object.entries(requiredFields)) {
+            if (!req.body[field]) {
+              return res.status(400).json({ message });
+            }
+          }
+          
           const personalId = await PersonalInfo.findByPk(personalID);
           if (!personalId) {
               return res.status(400).json({

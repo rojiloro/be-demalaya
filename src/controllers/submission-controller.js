@@ -10,6 +10,18 @@ const createSubmission = async (req, res) => {
             consent
         } = req.body;
 
+        const requiredFields = {
+            personalID: "Personal ID is required!",
+            howDidYouHear: "How Did You Hear field is required!",
+            consent: "Consent is required!"
+        };
+          
+        for (const [field, message] of Object.entries(requiredFields)) {
+        if (!req.body[field]) {
+            return res.status(400).json({ message });
+        }
+        }
+
         const personalId = await PersonalInfo.findByPk(personalID);
         if (!personalId) {
             return res.status(400).json({

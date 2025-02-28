@@ -11,7 +11,19 @@ const createAccomodation = async (req, res) => {
             specialAccommodationRequests
         } = req.body;
 
-        if(!travelDetailId ||!preferredAccommodationType || !roomType || !specialAccommodationRequests) return res.status(400).json({'message':'field are Required!'});
+        const requiredFields = {
+            travelDetailId: "Travel Detail ID is required!",
+            preferredAccommodationType: "Preferred Accommodation Type is required!",
+            roomType: "Room Type is required!",
+            specialAccommodationRequests: "Special Accommodation Requests is required!"
+        };
+          
+        for (const [field, message] of Object.entries(requiredFields)) {
+        if (!req.body[field]) {
+            return res.status(400).json({ message });
+        }
+        }
+          
 
         const travelDetails = await TravelDetail.findByPk(travelDetailId);
         if (!travelDetails) {
@@ -157,7 +169,7 @@ const updateAccomodation = async (req, res) => {
             TravelDetailsID : travelDetailsID,
             PreferredAccommodationType : prefferedAccommodationType,
             RoomType : roomType,
-            SprecialAccommodationRequest : specialAccommodationRequests
+            SpecialAccommodationRequests : specialAccommodationRequests
         })
 
         const travelDetail = await TravelDetail.findByPk(accommodationPref.TravelDetailsID);

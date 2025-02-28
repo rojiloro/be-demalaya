@@ -11,10 +11,19 @@ const createActivity = async (req, res) => {
             specialInterest
         } = req.body;
 
-        if(!travelDetailsId ||
-            !prefferedActivities ||
-            !activityLevel ||
-            !specialInterest) return res.status(400).json({'message':'field are Required!'});
+        const requiredFields = {
+            travelDetailsId: "Travel Details ID is required!",
+            prefferedActivities: "Preferred Activities are required!",
+            activityLevel: "Activity Level is required!",
+            specialInterest: "Special Interest is required!"
+        };
+          
+        for (const [field, message] of Object.entries(requiredFields)) {
+        if (!req.body[field]) {
+            return res.status(400).json({ message });
+        }
+        }
+          
 
         const travelDetails = await TravelDetails.findByPk(travelDetailsId);
         if (!travelDetails) {

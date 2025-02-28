@@ -11,11 +11,19 @@ const createSpecialRequest = async (req, res) => {
             specialRequestsNotes
         } = req.body;
 
-        if( !travelDetailsID ||
-            !occasionsToCelebrate ||
-            !additionalServicesNeeded ||
-            !specialRequestsNotes) return res.status(400).json({'message':'field are Required!'});
-
+        const requiredFields = {
+            travelDetailsID: "Travel Details ID is required!",
+            occasionsToCelebrate: "Occasions to Celebrate are required!",
+            additionalServicesNeeded: "Additional Services Needed are required!",
+            specialRequestsNotes: "Special Requests Notes are required!"
+        };
+          
+        for (const [field, message] of Object.entries(requiredFields)) {
+        if (!req.body[field]) {
+            return res.status(400).json({ message });
+        }
+        }
+          
         const travelDetails = await TravelDetails.findByPk(travelDetailsID);
         if (!travelDetails) {
             return res.status(400).json({

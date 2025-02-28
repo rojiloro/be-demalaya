@@ -5,12 +5,12 @@ const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { username, password } = req.body;
 
         // Cek apakah email sudah terdaftar
-        const existingUser = await User.findOne({ where: { email } });
+        const existingUser = await User.findOne({ where: { username } });
         if (existingUser) {
-            return res.status(400).json({ message: 'Email already registered' });
+            return res.status(400).json({ message: 'Username already registered' });
         }
 
         // Hash password sebelum disimpan
@@ -23,7 +23,6 @@ const register = async (req, res) => {
         // Simpan user ke database
         const newUser = await User.create({
             username,
-            email,
             password: hashedPassword
         });
 

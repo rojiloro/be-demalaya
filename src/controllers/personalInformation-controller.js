@@ -1,13 +1,27 @@
 const Model = require("../models/index.js");
 const PersonalInformation = Model.PersonalInformation;
+const User = Model.User;
 
 
 const createPersonalInformation = async (req, res) => {
     try {
         
-        const {fullname, email, phonenumber, preferedcontactmethod } = req.body;
+        const {userid, fullname, email, phonenumber, preferedcontactmethod } = req.body;
 
-        if(!fullname || !email || !phonenumber || !preferedcontactmethod) return res.status(400).json({'message':'field are Required!'});
+        const requiredFields = {
+            userid: "User ID is required!",
+            fullname: "Full name is required!",
+            email: "Email is required!",
+            phonenumber: "Phone number is required!",
+            preferedcontactmethod: "Preferred contact method is required!"
+          };
+          
+          for (const [field, message] of Object.entries(requiredFields)) {
+            if (!req.body[field]) {
+              return res.status(400).json({ message });
+            }
+          }
+          
 
         const validMethods = ['Email', 'Phone', 'WhatsApp', 'Other'];
         if (!validMethods.includes(preferedcontactmethod)) {
@@ -15,6 +29,7 @@ const createPersonalInformation = async (req, res) => {
         }
         
         const personalInfo = await PersonalInformation.create({
+            userId : userid,
             fullname:fullname,
             email:email,
             phonenumber:phonenumber,
